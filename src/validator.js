@@ -17,4 +17,8 @@ const ValidInt = (num) => {
     return !Number.isNaN(parseInt(num));
 };
 
-module.exports = { Priority, ValidString, ValidInt };
+const Empty = (ob) => {
+    return Object.keys(ob).length === 0;
+};
+
+module.exports = { Priority, ValidString, ValidInt, Empty };
