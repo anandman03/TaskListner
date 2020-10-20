@@ -6,7 +6,7 @@ const messages = require("./messages");
 const pathConfig = require("./helpers/pathConfig");
 
 const storeItem = async (task) => {
-    if(!fs.existsSync(pathConfig.filePath)) {
+    if(!FileExist()) {
         await saveItemInFile([task], task);
     }
     else {
@@ -23,4 +23,8 @@ const saveItemInFile = async (task, ob) => {
     });
 };
 
-module.exports = { storeItem };
+const FileExist = () => {
+     return fs.existsSync(pathConfig.filePath);
+};
+
+module.exports = { storeItem, FileExist };

@@ -15,6 +15,7 @@ const boxOptions = {
     borderColor: "white",
 };
 
+
 const Success = (type) => signale.success(chalk.white.bold(`Added 1 ${type}.`));
 
 const Invalid = () => signale.error(chalk.red.bold('Invalid Input'));
@@ -23,4 +24,6 @@ const boardTitle = (name) => boxen(chalk.rgb(255,0,255)(`${name}`), boxOptions);
 
 const viewTask = (task) => chalk.yellowBright(`${task.id}. ${task.desc} (${task.date})`);
 
-module.exports = { Success, Invalid, boardTitle, viewTask };
+const TaskEmpty = () => signale.error("You have No Task");
+
+module.exports = { Success, Invalid, boardTitle, viewTask, TaskEmpty };

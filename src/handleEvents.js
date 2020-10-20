@@ -20,7 +20,7 @@ const createTask = async (task) => {
 
 const createNote = async (note) => {
     if(validator.Empty(note)) {
-        console.log("Invalid Input");
+        messages.Invalid();
         return;
     }
     const structuredNote = await structureItem(note, "NOTE");
@@ -31,15 +31,17 @@ const createNote = async (note) => {
 const structureItem = async (item, type) => {
     let newItem = new Object();
     const length = Object.keys(item).length;
-    
+
     if(type === "NOTE") {
         newItem = new Note();
     }
     else if(type === "TASK") {
         newItem = new Task();
     }
-
     newItem._description = item[0];
+
+    const TL = (storage.FileExist()) ? require(pathConfig.filePath) : [];
+    newItem._id = TL.filter(ob => ob._type === type).length + 1;
 
     if(length == 2) {
         if(validator.Board(item[1])) {
@@ -61,7 +63,12 @@ const structureItem = async (item, type) => {
 };
 
 const displayBoards = () => {
-    const taskListner = require(pathConfig.filePath);
+    const taskListner = (storage.FileExist()) ? require(pathConfig.filePath) : [];
+    if(taskListner.length === 0) {
+        messages.TaskEmpty();
+        return;
+    }
+
     const dashBoards = new Set();
     for(const task of taskListner) {
         dashBoards.add(task._board);
