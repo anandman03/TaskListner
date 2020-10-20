@@ -2,11 +2,8 @@
 'use strict';
 
 const Priority = (p) => {
-    const priority = parseInt(p);
-    if(priority >= 1 && priority <= 3) {
-        return true;
-    }
-    return false;
+    const priority = parseInt(p.substring(2));
+    return (priority >= 1 && priority <= 3 && p[0] === 'p');
 };
 
 const ValidString = (s) => {
@@ -21,4 +18,8 @@ const Empty = (ob) => {
     return Object.keys(ob).length === 0;
 };
 
-module.exports = { Priority, ValidString, ValidInt, Empty };
+const Board = (string) => {
+    return string[0] === 'b';
+};
+
+module.exports = { Priority, ValidString, ValidInt, Empty, Board };
