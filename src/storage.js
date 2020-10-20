@@ -8,6 +8,7 @@ const pathConfig = require("./helpers/pathConfig");
 const storeItem = async (task) => {
     if(!fs.existsSync(pathConfig.filePath)) {
         fs.writeFileSync(pathConfig.filePath, JSON.stringify([task]), "utf8");
+        signale.success("Success!!");
     }
     else {
         const taskList = require(pathConfig.filePath);
