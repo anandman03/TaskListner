@@ -2,22 +2,25 @@
 'use strict';
 
 const fs = require("fs");
-const signale = require("signale");
+const messages = require("./messages");
 const pathConfig = require("./helpers/pathConfig");
 
 const storeItem = async (task) => {
     if(!fs.existsSync(pathConfig.filePath)) {
-        fs.writeFileSync(pathConfig.filePath, JSON.stringify([task]), "utf8");
-        signale.success("Success!!");
+        await saveItemInFile([task], task);
     }
     else {
         const taskList = require(pathConfig.filePath);
         taskList.push(task);
-        fs.writeFile(pathConfig.filePath, JSON.stringify(taskList), err => {
-            if(err) throw err;
-            signale.success("Success!!");
-        });
+        await saveItemInFile(taskList, task);
     }
+};
+
+const saveItemInFile = async (task, ob) => {
+    fs.writeFile(pathConfig.filePath, JSON.stringify(task), err => {
+        if(err) throw err;
+        messages.Success(ob._type);
+    });
 };
 
 module.exports = { storeItem };
