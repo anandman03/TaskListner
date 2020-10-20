@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-const Task = require("./task");
+const Task = require("./schema/task");
 const storage = require("./storage");
 const validator = require("./validator");
 

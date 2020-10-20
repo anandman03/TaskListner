@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-const date = require("./getDate");
+const date = require("../helpers/getDate");
 
 class Item {
     constructor(options = {}) {

@@ -2,7 +2,7 @@
 'use strict';
 
 const meow = require("meow");
-const help = require("./src/help");
+const help = require("./src/helpers/help");
 const taskListner = require("./index");
 
 const cli = meow(help, {

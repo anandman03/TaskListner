@@ -3,7 +3,7 @@
 
 const fs = require("fs");
 const signale = require("signale");
-const pathConfig = require("./pathConfig");
+const pathConfig = require("./helpers/pathConfig");
 
 const storeItem = async (task) => {
     if(!fs.existsSync(pathConfig.filePath)) {
