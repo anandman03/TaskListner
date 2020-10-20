@@ -1,18 +1,20 @@
 #!/usr/bin/env node
 'use strict';
 
+const storage = require("./storage");
 const Task = require("./schema/task");
 const Note = require("./schema/note");
-const storage = require("./storage");
+const messages = require("./messages");
 const validator = require("./validator");
+const pathConfig = require("./helpers/pathConfig");
 
 
 const createTask = async (task) => {
     if(validator.Empty(task)) {
-        console.log("Invalid Input");
+        messages.Invalid();
         return;
     }
-    const structuredTask = await reshapeItem(task, "TASK");
+    const structuredTask = await structureItem(task, "TASK");
     storage.storeItem(structuredTask);
 };
 
@@ -21,12 +23,12 @@ const createNote = async (note) => {
         console.log("Invalid Input");
         return;
     }
-    const structuredNote = await reshapeItem(note, "NOTE");
+    const structuredNote = await structureItem(note, "NOTE");
     storage.storeItem(structuredNote);
 };
 
 
-const reshapeItem = async (item, type) => {
+const structureItem = async (item, type) => {
     let newItem = new Object();
     const length = Object.keys(item).length;
     
@@ -58,5 +60,26 @@ const reshapeItem = async (item, type) => {
     return newItem;
 };
 
+const displayBoards = () => {
+    const taskListner = require(pathConfig.filePath);
+    const dashBoards = new Set();
+    for(const task of taskListner) {
+        dashBoards.add(task._board);
+    }
+    for(const board of dashBoards) {
+        console.log(messages.boardTitle(board));
+        for(const item of taskListner) {
+            if(board === item._board) {
+                const task = {
+                    id: item._id,
+                    desc: item._description,
+                    date: item._date,
+                };
+                console.log(messages.viewTask(task));
+            }
+        }
+    }
+};
 
-module.exports = { createTask, createNote };
+
+module.exports = { createTask, createNote, displayBoards };

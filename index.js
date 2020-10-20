@@ -11,7 +11,7 @@ const taskListner = (flags, input) => {
         handler.createNote(input);
     }
     else {
-        console.log("Invalid Input");
+        handler.displayBoards();
     }
 };
 
