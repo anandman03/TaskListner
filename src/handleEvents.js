@@ -2,6 +2,7 @@
 'use strict';
 
 const Task = require("./schema/task");
+const Note = require("./schema/note");
 const storage = require("./storage");
 const validator = require("./validator");
 
@@ -11,39 +12,51 @@ const createTask = async (task) => {
         console.log("Invalid Input");
         return;
     }
-    const structuredTask = await reshapeTask(task);
+    const structuredTask = await reshapeItem(task, "TASK");
     storage.storeItem(structuredTask);
 };
 
-const createNotes = async () => {
-
+const createNote = async (note) => {
+    if(validator.Empty(note)) {
+        console.log("Invalid Input");
+        return;
+    }
+    const structuredNote = await reshapeItem(note, "NOTE");
+    storage.storeItem(structuredNote);
 };
 
 
-const reshapeTask = async (task) => {
-    const temporaryTask = new Task();
-    const length = Object.keys(task).length;
+const reshapeItem = async (item, type) => {
+    let newItem = new Object();
+    const length = Object.keys(item).length;
     
-    temporaryTask._description = task[0];
+    if(type === "NOTE") {
+        newItem = new Note();
+    }
+    else if(type === "TASK") {
+        newItem = new Task();
+    }
+
+    newItem._description = item[0];
 
     if(length == 2) {
-        if(validator.ValidInt(task[1]) && validator.Priority(task[1])) {
-            temporaryTask._priority = parseInt(task[1]);
+        if(validator.Board(item[1])) {
+            newItem._board = item[1].substring(2);
         }
-        else if(!validator.ValidInt(task[1])) {
-            temporaryTask._board = task[1];
+        else if(validator.Priority(item[1])) {
+            newItem._priority = parseInt(item[1].substring(2));
         }
     }
     else if(length == 3) {
-        if(validator.ValidInt(task[1]) && validator.Priority(task[1])) {
-            temporaryTask._priority = task[1];
+        if(validator.Board(item[1])) {
+            newItem._board = item[1].substring(2);
         }
-        if(validator.ValidString(task[2])) {
-            temporaryTask._board = task[2];
+        if(validator.Priority(item[2])) {
+            newItem._priority = parseInt(item[2].substring(2));
         }
     }
-    return temporaryTask;
+    return newItem;
 };
 
 
-module.exports = { createTask, createNotes };
+module.exports = { createTask, createNote };

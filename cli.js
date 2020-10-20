@@ -18,6 +18,10 @@ const cli = meow(help, {
         task: {
             type: "boolean",
             alias: "t"
+        },
+        note: {
+            type: "boolean",
+            alias: "n"
         }
     }
 });
