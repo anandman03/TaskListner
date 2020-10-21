@@ -27,8 +27,26 @@ const createNote = async (note) => {
     storage.storeItem(structuredNote);
 };
 
-const displayBoards = () => {
-    const taskListner = (storage.FileExist()) ? require(pathConfig.filePath) : [];
+const removeItem = async (item) => {
+    if(validator.Empty(item)) {
+        messages.Invalid();
+        return;
+    }
+    const TL = await getTaskList();
+    if(TL.length === 0) {
+        messages.TaskEmpty();
+        return;
+    }
+    const itemIndex = parseInt(item[0]);
+    if(itemIndex > TL.length) {
+        messages.TaskNotFound(item[0]);
+        return;
+    }
+    storage.deleteItem(itemIndex-1);
+};
+
+const displayBoards = async () => {
+    let taskListner = await getTaskList();
     if(taskListner.length === 0) {
         messages.TaskEmpty();
         return;
@@ -39,7 +57,7 @@ const displayBoards = () => {
         dashBoards.add(task._board);
     }
     for(const board of dashBoards) {
-        console.log(messages.boardTitle(board));
+        messages.boardTitle(board);
         for(const item of taskListner) {
             if(board === item._board) {
                 const task = {
@@ -54,6 +72,13 @@ const displayBoards = () => {
 };
 
 
+const getTaskList = async () => {
+    if(storage.FileExist()) {
+        return require(pathConfig.filePath);
+    }
+    return [];
+};
+
 const structureItem = async (item, type) => {
     let newItem = new Object();
     if(type === "NOTE") {
@@ -63,7 +88,7 @@ const structureItem = async (item, type) => {
         newItem = new Task();
     }
 
-    const TL = (storage.FileExist()) ? require(pathConfig.filePath) : [];
+    const TL = await getTaskList();
     newItem._id = TL.length + 1;
  
     const desc = await getDescription(item);
@@ -122,4 +147,4 @@ const getPriority = async (item) => {
     return null;
 };
 
-module.exports = { createTask, createNote, displayBoards };
+module.exports = { createTask, createNote, displayBoards, removeItem };

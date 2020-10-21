@@ -21,15 +21,18 @@ signale.config({
 
 const Success = (type) => signale.debug(chalk.white.bold(`added ${String(type).toLocaleLowerCase()} successfully.`));
 
+const Deletion = (index) => signale.debug(chalk.white.bold(`removed ${index} successfully.`));
+
 const Invalid = () => signale.error(chalk.red.bold('Invalid Input'));
 
-const boardTitle = (name) => boxen(chalk.rgb(255,0,255)(`${name}`), boxOptions);
+const boardTitle = (name) => console.log(boxen(chalk.rgb(255,0,255)(`${name}`), boxOptions));
 
 const TaskEmpty = () => signale.error("You have No Task");
 
+const TaskNotFound = (index) => signale.error(`Task with ID: ${index} not found`);
+
 const viewTask = (item, type) =>  {
     if(type === "NOTE") {
-        // console.log
         signale.note(chalk.yellowBright(`${item.id}. ${item.desc} (${item.date})`));
     }
     else if(type === "TASK") {
@@ -37,4 +40,4 @@ const viewTask = (item, type) =>  {
     }
 };
 
-module.exports = { Success, Invalid, boardTitle, viewTask, TaskEmpty };
+module.exports = { Success, Deletion, Invalid, boardTitle, viewTask, TaskEmpty, TaskNotFound };

@@ -10,6 +10,9 @@ const taskListner = (flags, input) => {
     else if(flags.note) {
         handler.createNote(input);
     }
+    else if(flags.remove) {
+        handler.removeItem(input);
+    }
     else {
         handler.displayBoards();
     }
