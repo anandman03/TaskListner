@@ -6,6 +6,7 @@ const Task = require("./schema/task");
 const Note = require("./schema/note");
 const messages = require("./messages");
 const validator = require("./validator");
+const getDate = require("./helpers/getDate");
 const pathConfig = require("./helpers/pathConfig");
 
 
@@ -63,7 +64,8 @@ const displayBoards = async () => {
                 const task = {
                     id: item._id,
                     desc: item._description,
-                    date: item._date,
+                    days: getDate.calculateDays(item._date)
+                    // days: item._date
                 };
                 messages.viewTask(task, item._type);
             }

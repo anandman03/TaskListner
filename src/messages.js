@@ -33,10 +33,10 @@ const TaskNotFound = (index) => signale.error(`Task with ID: ${index} not found`
 
 const viewTask = (item, type) =>  {
     if(type === "NOTE") {
-        signale.note(chalk.yellowBright(`${item.id}. ${item.desc} (${item.date})`));
+        signale.note(chalk.yellowBright(`${item.id}. ${item.desc} (${item.days}d)`));
     }
     else if(type === "TASK") {
-        signale.pending(chalk.yellowBright(`${item.id}. ${item.desc} (${item.date})`));
+        signale.pending(chalk.yellowBright(`${item.id}. ${item.desc} (${item.days}d)`));
     }
 };
 

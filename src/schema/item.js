@@ -7,7 +7,7 @@ class Item {
     constructor(options = {}) {
         this._id = options.id || 1;
         this._description = options.description;
-        this._date = date;
+        this._date = String(date.currDate);
         this._board = options.board || "Default";
     }
 };

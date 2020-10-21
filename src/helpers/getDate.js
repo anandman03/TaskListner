@@ -3,6 +3,10 @@
 
 const currDate = new Date();
 
-const formatedDate = currDate.getUTCDate() + "/" + (currDate.getUTCMonth() + 1) + "/" + currDate.getUTCFullYear();
+const calculateDays = (date) => {
+    const prev = new Date(date);
+    const time = currDate - prev;
+    return Math.floor(time/(1000*3600*24));
+};
 
-module.exports = formatedDate;
+module.exports = { currDate, calculateDays };
