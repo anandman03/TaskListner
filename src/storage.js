@@ -25,6 +25,12 @@ const deleteItem = async (index) => {
     await saveItemInFile(taskList, {}, index+1, "D");
 };
 
+const updateCompleteStatus = async (index) => {
+    let list = await getTaskList();
+    list[index]._isComplete = true;
+    await saveItemInFile(list, {}, index+1, "U");
+};
+
 const saveItemInFile = async (task, ob, index, type) => {
     fs.writeFile(pathConfig.filePath, JSON.stringify(task), err => {
         if(err) throw err;
@@ -34,11 +40,21 @@ const saveItemInFile = async (task, ob, index, type) => {
         if(type === "D") {
             messages.Deletion(index);
         }
+        if(type === "U") {
+            messages.update(index);
+        }
     });
+};
+
+const getTaskList = async () => {
+    if(FileExist()) {
+        return require(pathConfig.filePath);
+    }
+    return [];
 };
 
 const FileExist = () => {
      return fs.existsSync(pathConfig.filePath);
 };
 
-module.exports = { storeItem, deleteItem, FileExist };
+module.exports = { storeItem, deleteItem, getTaskList, updateCompleteStatus};

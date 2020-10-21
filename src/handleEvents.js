@@ -7,7 +7,6 @@ const Note = require("./schema/note");
 const messages = require("./messages");
 const validator = require("./validator");
 const getDate = require("./helpers/getDate");
-const pathConfig = require("./helpers/pathConfig");
 
 
 const createTask = async (task) => {
@@ -33,7 +32,7 @@ const removeItem = async (item) => {
         messages.Invalid();
         return;
     }
-    const TL = await getTaskList();
+    const TL = await storage.getTaskList();
     if(TL.length === 0) {
         messages.TaskEmpty();
         return;
@@ -47,7 +46,7 @@ const removeItem = async (item) => {
 };
 
 const displayBoards = async () => {
-    let taskListner = await getTaskList();
+    let taskListner = await storage.getTaskList();
     if(taskListner.length === 0) {
         messages.TaskEmpty();
         return;
@@ -74,13 +73,6 @@ const displayBoards = async () => {
 };
 
 
-const getTaskList = async () => {
-    if(storage.FileExist()) {
-        return require(pathConfig.filePath);
-    }
-    return [];
-};
-
 const structureItem = async (item, type) => {
     let newItem = new Object();
     if(type === "NOTE") {
@@ -90,7 +82,7 @@ const structureItem = async (item, type) => {
         newItem = new Task();
     }
 
-    const TL = await getTaskList();
+    const TL = await storage.getTaskList();
     newItem._id = TL.length + 1;
  
     const desc = await getDescription(item);
