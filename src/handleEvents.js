@@ -47,7 +47,7 @@ const displayBoards = () => {
                     desc: item._description,
                     date: item._date,
                 };
-                console.log(messages.viewTask(task));
+                messages.viewTask(task, item._type);
             }
         }
     }
@@ -64,7 +64,7 @@ const structureItem = async (item, type) => {
     }
 
     const TL = (storage.FileExist()) ? require(pathConfig.filePath) : [];
-    newItem._id = TL.filter(ob => ob._type === type).length + 1;
+    newItem._id = TL.length + 1;
  
     const desc = await getDescription(item);
     if(desc.length === 0) {
