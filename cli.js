@@ -30,6 +30,10 @@ const cli = meow(help, {
         done: {
             type: "boolean",
             alias: "d"
+        },
+        priority: {
+            type: "boolean",
+            alias: "p"
         }
     }
 });

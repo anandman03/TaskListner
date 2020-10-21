@@ -10,35 +10,41 @@ const storeItem = async (task) => {
         await saveItemInFile([task], task, -1, "C");
     }
     else {
-        const taskList = require(pathConfig.filePath);
-        taskList.push(task);
-        await saveItemInFile(taskList, task, -1, "C");
+        const list = await getTaskList();
+        list.push(task);
+        await saveItemInFile(list, task, -1, "C");
     }
 };
 
 const deleteItem = async (index) => {
-    let taskList = require(pathConfig.filePath);
-    taskList.splice(index, 1);
-    for(let i = index ; i < taskList.length ; i++) {
-        taskList[i]._id -= 1;
+    let list = await getTaskList();
+    list.splice(index, 1);
+    for(let i = index ; i < list.length ; i++) {
+        list[i]._id -= 1;
     }
-    await saveItemInFile(taskList, {}, index+1, "D");
+    await saveItemInFile(list, {}, index+1, "D");
 };
 
 const updateCompleteStatus = async (index) => {
     let list = await getTaskList();
-    list[index]._isComplete = true;
+    list[index]._isComplete = !list[index]._isComplete;
     await saveItemInFile(list, {}, index+1, "U");
 };
+
+// const updatePriority = async (index) => {
+//     let list = await getTaskList();
+//     list[index]._priority = ;
+//     await saveItemInFile(list, {}, index+1, "U");
+// };
 
 const saveItemInFile = async (task, ob, index, type) => {
     fs.writeFile(pathConfig.filePath, JSON.stringify(task), err => {
         if(err) throw err;
         if(type === "C") {
-            messages.Success(ob._type);
+            messages.success(ob._type);
         }
         if(type === "D") {
-            messages.Deletion(index);
+            messages.deletion(index);
         }
         if(type === "U") {
             messages.update(index);

@@ -10,61 +10,44 @@ const getDate = require("./helpers/getDate");
 
 
 const createTask = async (task) => {
-    if(validator.Empty(task)) {
-        messages.Invalid();
-        return;
-    }
+    validator.emptyObject(task);
     const structuredTask = await structureItem(task, "TASK");
     storage.storeItem(structuredTask);
 };
 
 const createNote = async (note) => {
-    if(validator.Empty(note)) {
-        messages.Invalid();
-        return;
-    }
+    validator.emptyObject(note);
     const structuredNote = await structureItem(note, "NOTE");
     storage.storeItem(structuredNote);
 };
 
 const removeItem = async (item) => {
-    if(validator.Empty(item)) {
-        messages.Invalid();
-        return;
-    }
-    const TL = await storage.getTaskList();
-    if(TL.length === 0) {
-        messages.TaskEmpty();
-        return;
-    }
+    validator.emptyObject(item);
+    const list = await storage.getTaskList();
+    validator.emptyContainer(list);
+
     const itemIndex = parseInt(item[0]);
-    if(itemIndex > TL.length) {
-        messages.TaskNotFound(item[0]);
-        return;
-    }
+    validator.compareLength(itemIndex, list);
+    
     storage.deleteItem(itemIndex-1);
 };
 
 const displayBoards = async () => {
-    let taskListner = await storage.getTaskList();
-    if(taskListner.length === 0) {
-        messages.TaskEmpty();
-        return;
-    }
+    const list = await storage.getTaskList();
+    validator.emptyContainer(list);
 
     const dashBoards = new Set();
-    for(const task of taskListner) {
+    for(const task of list) {
         dashBoards.add(task._board);
     }
     for(const board of dashBoards) {
         messages.boardTitle(board);
-        for(const item of taskListner) {
+        for(const item of list) {
             if(board === item._board) {
                 const task = {
                     id: item._id,
                     desc: item._description,
                     days: getDate.calculateDays(item._date)
-                    // days: item._date
                 };
                 messages.viewTask(task, item._type);
             }
@@ -82,14 +65,11 @@ const structureItem = async (item, type) => {
         newItem = new Task();
     }
 
-    const TL = await storage.getTaskList();
-    newItem._id = TL.length + 1;
+    const list = await storage.getTaskList();
+    newItem._id = list.length + 1;
  
     const desc = await getDescription(item);
-    if(desc.length === 0) {
-        messages.Invalid();
-        return;
-    }
+    validator.emptyContainer(desc);
     newItem._description = desc;
 
     const db = await getDashboard(item);
