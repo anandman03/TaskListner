@@ -9,4 +9,10 @@ const calculateDays = (date) => {
     return Math.floor(time/(1000*3600*24));
 };
 
-module.exports = { currDate, calculateDays };
+const structureDate = async (date) => {
+    let str = new String(date);
+    str = str.substring(0, 15).trim();
+    return str;
+};
+
+module.exports = { currDate, calculateDays, structureDate };

@@ -18,18 +18,19 @@ const findItem = async (item) => {
     }
 };
 
-const viewTimeline = async (item) => {
-    const list = await storage.getTaskList();
+const viewTimeline = async () => {
+    let list = await storage.getTaskList();
     validator.emptyContainer(list);
 
     const dates = new Set();
-    for(const task of list) {
+    for(let task of list) {
+        task._date = await getDate.structureDate(task._date);
         dates.add(task._date);
     }
-    for(const date of dates) 
+    for(let date of dates) 
     {
         messages.boardTitle(date);
-        for(const item of list) 
+        for(const item of list)
         {
             if(date === item._date) 
             {
