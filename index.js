@@ -50,6 +50,9 @@ const taskListner = (flags, input) => {
     else if(flags.erase) {
         handler.eraseList();
     }
+    else if(flags.list) {
+        display.listItems(input);
+    }
     else {
         display.displayItems();
     }

@@ -110,6 +110,114 @@ const displayItems = async () => {
     calculate();
 };
 
+const listItems = async (item) => {
+    let str = String(item.join()).trim();
+    if(str === "done") {
+        await doneTask();
+    }
+    if(str === "pending") {
+        await pendingTask();
+    }
+    if(str === "in-progress") {
+        await inProgressTask();
+    }
+    if(str === "notes") {
+        await getNotes();
+    }
+};
+
+const doneTask = async () => {
+    const list = await storage.getTaskList();
+    initialise();
+
+    for(const item of list) {
+        if(item._isComplete === true) {
+            const task = await makeObject(item);
+            messages.viewTask(task, item._type);
+            done += 1;
+        }
+        else {
+            pending += 1;
+        }
+        if(item._inProgress === true) {
+            inProcess += 1;
+        }
+        if(item._type === "NOTE") {
+            notes += 1;
+        }
+    }
+    calculate();
+};
+
+const pendingTask = async () => {
+    const list = await storage.getTaskList();
+    initialise();
+
+    for(const item of list) {
+        if(item._isComplete !== true) {
+            const task = await makeObject(item);
+            messages.viewTask(task, item._type);
+            pending += 1;
+        }
+        else {
+            done += 1;
+        }
+        if(item._inProgress === true) {
+            inProcess += 1;
+        }
+        if(item._type === "NOTE") {
+            notes += 1;
+        }
+    }
+    calculate();
+};
+
+const inProgressTask = async () => {
+    const list = await storage.getTaskList();
+    initialise();
+
+    for(const item of list) {
+        if(item._isComplete !== true) {
+            pending += 1;
+        }
+        else {
+            done += 1;
+        }
+        if(item._inProgress === true) {
+            const task = await makeObject(item);
+            messages.viewTask(task, item._type);
+            inProcess += 1;
+        }
+        if(item._type === "NOTE") {
+            notes += 1;
+        }
+    }
+    calculate();
+};
+
+const getNotes = async () => {
+    const list = await storage.getTaskList();
+    initialise();
+
+    for(const item of list) {
+        if(item._isComplete !== true) {
+            pending += 1;
+        }
+        else {
+            done += 1;
+        }
+        if(item._inProgress === true) {
+            inProcess += 1;
+        }
+        if(item._type === "NOTE") {
+            const task = await makeObject(item);
+            messages.viewTask(task, item._type);
+            notes += 1;
+        }
+    }
+    calculate();
+};
+
 const viewTask = async (value) => {
     const list = await storage.getTaskList();
     initialise();
@@ -177,6 +285,7 @@ const makeObject = async (item) => {
 
 module.exports = {
     findItem,
+    listItems,
     viewTimeline,
     displayItems,
 };
