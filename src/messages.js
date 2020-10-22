@@ -94,17 +94,26 @@ const overView = (done, pending, notes) => {
 const viewTask = (item, type) =>  {
     if(type === "NOTE") {
         signale.note({
-            prefix: chalk.gray(`${item.id}.`), 
-            message: chalk.gray(`${item.desc}`), 
-            suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
+            prefix: chalk.whiteBright(`${item.id}.`), 
+            message: chalk.whiteBright(`${item.desc}`), 
+            suffix: chalk.whiteBright(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
         });
     }
     else if(type === "TASK") {
-        signale.success({
-            prefix: chalk.gray(`${item.id}.`), 
-            message: chalk.gray(`${item.desc}`), 
-            suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
-        });
+        if(item.done === true) {
+            signale.success({
+                prefix: chalk.gray(`${item.id}.`), 
+                message: chalk.gray(`${item.desc}`), 
+                suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
+            });
+        }
+        else {
+            signale.pending({
+                prefix: chalk.whiteBright(`${item.id}.`), 
+                message: chalk.whiteBright(`${item.desc}`), 
+                suffix: chalk.whiteBright(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
+            });
+        }
     }
 };
 

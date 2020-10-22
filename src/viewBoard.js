@@ -154,6 +154,7 @@ const makeObject = async (item) => {
         desc: item._description,
         days: getDate.calculateDays(item._date),
         star: Boolean(item._isStarred),
+        done: Boolean(item._isComplete) || false,
     };
     return task;
 };
