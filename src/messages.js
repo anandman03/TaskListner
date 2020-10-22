@@ -72,7 +72,7 @@ const taskEmpty = () => {
     newLine();
     signale.error(chalk.whiteBright('Type `tl --help` to get started!'));
     taskCompleteData(0);
-    overView(0, 0, 0);
+    overView(0, 0, 0, 0);
     newLine();
 };
 
@@ -91,11 +91,12 @@ const taskCompleteData = (percent) => {
     });
 };
 
-const overView = (done, pending, notes) => {
+const overView = (done, pending, inProcess, notes) => {
     const Done = chalk.green(`${done}`);
     const Pending = chalk.magenta(`${pending}`);
+    const InProcess = chalk.green(`${inProcess}`);
     const Notes = chalk.blue(`${notes}`);
-    const message = chalk.gray(`${Done} done  |  ${Pending} pending  |  ${Notes} notes`);
+    const message = chalk.gray(`${Done} done  |  ${Pending} pending  |  ${InProcess} in-progress  |  ${Notes} notes`);
     console.log(message);
 };
 

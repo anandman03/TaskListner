@@ -10,15 +10,16 @@ const getDate = require("./helpers/getDate");
 let done = 0;
 let pending = 0;
 let notes = 0;
+let inProcess = 0;
 
 const initialise = () => {
-    done = pending = notes = 0;
+    done = pending = notes = inProcess = 0;
 };
 
 const calculate = () => {
     let percentCompletion = Math.floor(100*(done/(done + pending)));
     messages.taskCompleteData(percentCompletion);
-    messages.overView(done, pending, notes);
+    messages.overView(done, pending, inProcess, notes);
     messages.newLine();
 };
 
@@ -53,7 +54,10 @@ const viewTimeline = async () => {
             {
                 const task = await makeObject(item);
                 messages.viewTask(task, item._type);
-
+                
+                if(item._inProgress === true) {
+                    inProcess += 1;
+                }
                 if(item._type === "NOTE") {
                     notes += 1;
                 }
@@ -88,6 +92,9 @@ const displayItems = async () => {
                 const task = await makeObject(item);
                 messages.viewTask(task, item._type);
 
+                if(item._inProgress === true) {
+                    inProcess += 1;
+                }
                 if(item._type === "NOTE") {
                     notes += 1;
                 }
@@ -112,6 +119,9 @@ const viewTask = async (value) => {
             const task = await makeObject(item);
             messages.viewTask(task, item._type);
         }
+        if(item._inProgress === true) {
+            inProcess += 1;
+        }
         if(item._type === "NOTE") {
             notes += 1;
         }
@@ -134,6 +144,9 @@ const viewBoard = async (value) => {
         if(value == item._board) {
             const task = await makeObject(item);
             messages.viewTask(task, item._type);
+        }
+        if(item._inProgress === true) {
+            inProcess += 1;
         }
         if(item._type === "NOTE") {
             notes += 1;
