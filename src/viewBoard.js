@@ -156,6 +156,7 @@ const makeObject = async (item) => {
         star: Boolean(item._isStarred),
         done: Boolean(item._isComplete) || false,
         priority: Number(item._priority),
+        inProgress: Boolean(item._inProgress),
     };
     return task;
 };

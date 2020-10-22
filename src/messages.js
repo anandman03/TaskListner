@@ -115,6 +115,13 @@ const viewTask = (item, type) =>  {
                 suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
             });
         }
+        else if(item.inProgress === true) {
+            signale.start({
+                prefix: chalk.whiteBright.underline(`${item.id}.`), 
+                message: chalk.whiteBright.underline(`${item.desc}`), 
+                suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
+            });
+        }
         else {
             if(item.priority == 3) {
                 signale.pending({
