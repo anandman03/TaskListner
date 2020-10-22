@@ -96,7 +96,7 @@ const viewTask = (item, type) =>  {
         signale.note({
             prefix: chalk.whiteBright(`${item.id}.`), 
             message: chalk.whiteBright(`${item.desc}`), 
-            suffix: chalk.whiteBright(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
+            suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
         });
     }
     else if(type === "TASK") {
@@ -108,11 +108,27 @@ const viewTask = (item, type) =>  {
             });
         }
         else {
-            signale.pending({
-                prefix: chalk.whiteBright(`${item.id}.`), 
-                message: chalk.whiteBright(`${item.desc}`), 
-                suffix: chalk.whiteBright(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
-            });
+            if(item.priority == 3) {
+                signale.pending({
+                    prefix: chalk.whiteBright(`${item.id}.`), 
+                    message: chalk.whiteBright(`${item.desc}`), 
+                    suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
+                });
+            }
+            if(item.priority == 2) {
+                signale.pending({
+                    prefix: chalk.yellowBright(`${item.id}.`), 
+                    message: chalk.yellowBright(`${item.desc}`), 
+                    suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
+                });
+            }
+            if(item.priority == 1) {
+                signale.pending({
+                    prefix: chalk.redBright(`${item.id}.`), 
+                    message: chalk.redBright(`${item.desc}`), 
+                    suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
+                });
+            }
         }
     }
 };
