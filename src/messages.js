@@ -93,7 +93,11 @@ const overView = (done, pending, notes) => {
 
 const viewTask = (item, type) =>  {
     if(type === "NOTE") {
-        signale.note(chalk.yellowBright(`${item.id}. ${item.desc} (${item.days}d)`));
+        signale.note({
+            prefix: chalk.gray(`${item.id}.`), 
+            message: chalk.gray(`${item.desc}`), 
+            suffix: chalk.gray(`(${item.days}d)`)
+        });
     }
     else if(type === "TASK") {
         signale.success({
