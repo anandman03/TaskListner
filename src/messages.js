@@ -19,6 +19,10 @@ signale.config({
     displayLabel: false,
 });
 
+const newLine = () => {
+    console.log('\n');
+}
+
 const creation = (task) => {
     signale.debug({
         prefix: '\n', 
@@ -56,11 +60,13 @@ const boardTitle = (name) => {
     console.log(boxen(chalk.rgb(255,0,255)(`${name}`), boxOptions));
 };
 
-//
 const taskEmpty = () => {
-    signale.error("You have No Task");
+    newLine();
+    signale.error(chalk.whiteBright('Type `tl --help` to get started!'));
+    taskCompleteData(0);
+    overView(0, 0, 0);
+    newLine();
 };
-//
 
 const taskNotFound = (ID) => {
     signale.error({
@@ -93,12 +99,13 @@ const viewTask = (item, type) =>  {
         signale.success({
             prefix: chalk.gray(`${item.id}.`), 
             message: chalk.gray(`${item.desc}`), 
-            suffix: chalk.grey(`(${item.days}d)`)
+            suffix: chalk.gray(`(${item.days}d)`)
         });
     }
 };
 
 module.exports = {
+    newLine,
     invalid,
     creation,
     deletion,
