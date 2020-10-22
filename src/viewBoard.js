@@ -77,6 +77,7 @@ const displayItems = async () => {
     }
     let percentCompletion = Math.floor(100*(done/(done + pending)));
     messages.taskCompleteData(percentCompletion);
+    messages.overView(done, pending, notes);
 };
 
 const makeObject = async (item) => {

@@ -77,6 +77,14 @@ const taskCompleteData = (percent) => {
     });
 };
 
+const overView = (done, pending, notes) => {
+    const Done = chalk.green(`${done}`);
+    const Pending = chalk.magenta(`${pending}`);
+    const Notes = chalk.blue(`${notes}`);
+    const message = chalk.gray(`${Done} done  |  ${Pending} pending  |  ${Notes} notes`);
+    console.log(message);
+};
+
 const viewTask = (item, type) =>  {
     if(type === "NOTE") {
         signale.note(chalk.yellowBright(`${item.id}. ${item.desc} (${item.days}d)`));
@@ -91,13 +99,14 @@ const viewTask = (item, type) =>  {
 };
 
 module.exports = {
+    invalid,
     creation,
     deletion,
-    invalid,
-    boardTitle,
     viewTask,
-    taskEmpty,
-    taskNotFound,
     updation,
+    overView,
+    taskEmpty,
+    boardTitle,
+    taskNotFound,
     taskCompleteData
 };
