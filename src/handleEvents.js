@@ -6,6 +6,7 @@ const Task = require("./schema/task");
 const Note = require("./schema/note");
 const messages = require("./messages");
 const validator = require("./validator");
+const clipboardy = require("clipboardy");
 
 
 const createTask = async (task) => {
@@ -96,6 +97,17 @@ const starItem = async (item) => {
     validator.compareLength(ID, list);
     let board = item.join(' ').substring(1).trim();
     await storage.updateStarItem(ID-1, board);
+};
+
+const copyToClipboard = async (item) => {
+    const list = await storage.getTaskList();
+    validator.emptyContainer(list);
+
+    let ID = parseInt(item[0]);
+    validator.compareLength(ID, list);
+
+    const copiedItem = list[ID-1]._description;
+    clipboardy.writeSync(copiedItem);
 };
 
 
@@ -194,4 +206,5 @@ module.exports = {
     editTask,
     changeBoard,
     changePriority,
+    copyToClipboard,
 };

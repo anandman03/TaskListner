@@ -21,6 +21,7 @@
   "dependencies": {
     "boxen": "^4.2.0",
     "chalk": "^4.1.0",
+    "clipboardy": "^2.3.0",
     "meow": "^7.1.1",
     "signale": "^1.4.0"
   }

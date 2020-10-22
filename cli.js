@@ -55,6 +55,10 @@ const cli = meow(help, {
             type: "boolean",
             alias: "s"
         },
+        copy: {
+            type: "boolean",
+            alias: "c"
+        },
     }
 });
 

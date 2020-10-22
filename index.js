@@ -35,6 +35,9 @@ const taskListner = (flags, input) => {
     else if(flags.star) {
         handler.starItem(input);
     }
+    else if(flags.copy) {
+        handler.copyToClipboard(input);
+    }
     else {
         display.displayBoards();
     }
