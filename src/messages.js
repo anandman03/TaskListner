@@ -83,4 +83,4 @@ const viewTask = (item, type) =>  {
     }
 };
 
-module.exports = { creation, deletion, invalid, boardTitle, viewTask, taskEmpty, taskNotFound, cantComplete, updation };
+module.exports = { creation, deletion, invalid, boardTitle, viewTask, taskEmpty, taskNotFound, updation };
