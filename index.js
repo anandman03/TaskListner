@@ -44,6 +44,9 @@ const taskListner = (flags, input) => {
     else if(flags.timeline) {
         display.viewTimeline();
     }
+    else if(flags.begin) {
+        handler.startTask(input);
+    }
     else {
         display.displayItems();
     }

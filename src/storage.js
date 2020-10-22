@@ -69,6 +69,12 @@ const updateList = async (list) => {
     await saveItemInFile(list, {}, -1, "UB");
 };
 
+const updateProgress = async (ID) => {
+    let list = await getTaskList();
+    list[ID]._inProgress = !list[ID]._inProgress;
+    await saveItemInFile(list, {}, ID+1, "U");
+};
+
 
 const saveItemInFile = async (task, ob, index, type) => {
     fs.writeFile(pathConfig.filePath, JSON.stringify(task), err => {
@@ -108,6 +114,7 @@ module.exports = {
     updateBoard,
     updateStarItem,
     updatePriority,
+    updateProgress,
     updateTaskBoard,
     updateCompleteStatus
 };

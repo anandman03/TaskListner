@@ -130,6 +130,15 @@ const unpinItem = async () => {
     await storage.updateList(modifiedList);
 };
 
+const startTask = async (item) => {
+    const list = await storage.getTaskList();
+    validator.emptyContainer(list);
+
+    const ID = parseInt(item[0]);
+    validator.validID(ID, list);
+    await storage.updateProgress(ID-1);
+};
+
 
 const structureItem = async (item, type) => {
     let newItem = new Object();
@@ -224,6 +233,7 @@ module.exports = {
     moveItem,
     markDone,
     editTask,
+    startTask,
     unpinItem,
     changeBoard,
     changePriority,
