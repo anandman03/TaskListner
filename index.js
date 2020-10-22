@@ -26,6 +26,9 @@ const taskListner = (flags, input) => {
     else if(flags.edit) {
         handler.editTask(input);
     }
+    else if(flags.move) {
+        handler.moveItem(input);
+    }
     else {
         display.displayBoards();
     }
