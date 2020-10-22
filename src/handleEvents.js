@@ -42,7 +42,8 @@ const markDone = async (ID) => {
     await storage.updateCompleteStatus(ID-1);
 };
 
-const updatePriority = async (ID) => {
+const changePriority = async (item) => {
+    const ID = parseInt(item[0]);
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
     validator.compareLength(ID, list);
@@ -50,7 +51,12 @@ const updatePriority = async (ID) => {
         messages.cantComplete();
         return;
     }
-    await storage.updateCompleteStatus(ID-1);
+    const priority = await getPriority(item);
+    if(priority === null) {
+        messages.invalid();
+        process.exit();
+    }
+    await storage.updatePriority(ID-1, priority);
 };
 
 
@@ -111,12 +117,12 @@ const getDashboard = async (item) => {
 };
 
 const getPriority = async (item) => {
-    for(const str of item) {
-        if(str.substring(2) === "p:") {
-            return str[2].trim();
-        }
+    const str = item.join(' ');
+    let index = str.indexOf("p:");
+    if(index === -1) {
+        return null;
     }
-    return null;
+    return str[index+2];
 };
 
 module.exports = { 
@@ -124,5 +130,5 @@ module.exports = {
     createNote,
     removeItem,
     markDone,
-    updatePriority,
+    changePriority,
 };

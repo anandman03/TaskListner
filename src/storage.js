@@ -31,11 +31,11 @@ const updateCompleteStatus = async (index) => {
     await saveItemInFile(list, {}, index+1, "U");
 };
 
-// const updatePriority = async (index) => {
-//     let list = await getTaskList();
-//     list[index]._priority = ;
-//     await saveItemInFile(list, {}, index+1, "U");
-// };
+const updatePriority = async (index, p) => {
+    let list = await getTaskList();
+    list[index]._priority = p;
+    await saveItemInFile(list, {}, index+1, "U");
+};
 
 const saveItemInFile = async (task, ob, index, type) => {
     fs.writeFile(pathConfig.filePath, JSON.stringify(task), err => {
@@ -63,4 +63,10 @@ const FileExist = () => {
      return fs.existsSync(pathConfig.filePath);
 };
 
-module.exports = { storeItem, deleteItem, getTaskList, updateCompleteStatus};
+module.exports = { 
+    storeItem,
+    deleteItem,
+    getTaskList,
+    updatePriority,
+    updateCompleteStatus
+};

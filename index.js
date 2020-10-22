@@ -18,7 +18,7 @@ const taskListner = (flags, input) => {
         handler.markDone(parseInt(input[0]));
     }
     else if(flags.priority) {
-        handler.updatePriority(parseInt(input[0]));
+        handler.changePriority(input);
     }
     else {
         display.displayBoards();
