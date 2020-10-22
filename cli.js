@@ -39,6 +39,10 @@ const cli = meow(help, {
             type: "boolean",
             alias: "b"
         },
+        edit: {
+            type: "boolean",
+            alias: "e"
+        },
     }
 });
 

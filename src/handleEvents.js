@@ -65,9 +65,19 @@ const changeBoard = async (item) => {
 
     let currName = await getCurrBoardName(item);
     let newName = await getNewBoardName(item);
-    console.log(currName + ' ' + newName);
     await storage.updateBoard(currName, newName);
 };
+
+const editTask = async (item) => {
+    const list = await storage.getTaskList();
+    validator.emptyContainer(list);
+
+    let ID = parseInt(item[0]);
+    validator.compareLength(ID, list);
+    let desc = item.join(' ').substring(1).trim();
+    await storage.updateTask(ID-1, desc);
+};
+
 
 const structureItem = async (item, type) => {
     let newItem = new Object();
@@ -159,6 +169,7 @@ module.exports = {
     createNote,
     removeItem,
     markDone,
+    editTask,
     changeBoard,
     changePriority,
 };
