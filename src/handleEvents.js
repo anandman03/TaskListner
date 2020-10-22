@@ -110,6 +110,25 @@ const copyToClipboard = async (item) => {
     clipboardy.writeSync(copiedItem);
 };
 
+const unpinItem = async () => {
+    const list = await storage.getTaskList();
+    validator.emptyContainer(list);
+
+    const modifiedList = [];
+    let idCounter = 1;
+    for(const item of list) {
+        if(item._isComplete === false) {
+            item._id = idCounter;
+            idCounter += 1;
+            modifiedList.push(item);
+        }
+        else {
+            continue;
+        }
+    }
+    await storage.updateList(modifiedList);
+};
+
 
 const structureItem = async (item, type) => {
     let newItem = new Object();
@@ -204,6 +223,7 @@ module.exports = {
     moveItem,
     markDone,
     editTask,
+    unpinItem,
     changeBoard,
     changePriority,
     copyToClipboard,

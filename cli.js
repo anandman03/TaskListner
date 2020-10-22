@@ -59,6 +59,10 @@ const cli = meow(help, {
             type: "boolean",
             alias: "c"
         },
+        unpin: {
+            type: "boolean",
+            alias: "u"
+        },
     }
 });
 

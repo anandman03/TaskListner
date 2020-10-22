@@ -65,6 +65,10 @@ const updateStarItem = async (ID) => {
     await saveItemInFile(list, {}, ID+1, "U");
 };
 
+const updateList = async (list) => {
+    await saveItemInFile(list, {}, -1, "UB");
+};
+
 
 const saveItemInFile = async (task, ob, index, type) => {
     fs.writeFile(pathConfig.filePath, JSON.stringify(task), err => {
@@ -96,6 +100,7 @@ module.exports = {
     storeItem,
     deleteItem,
     getTaskList,
+    updateList,
     updateTask,
     updateBoard,
     updateStarItem,

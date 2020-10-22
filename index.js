@@ -38,6 +38,9 @@ const taskListner = (flags, input) => {
     else if(flags.copy) {
         handler.copyToClipboard(input);
     }
+    else if(flags.unpin) {
+        handler.unpinItem();
+    }
     else {
         display.displayBoards();
     }
