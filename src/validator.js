@@ -30,11 +30,18 @@ const emptyContainer = (list) => {
     }
 };
 
-const validIDs = (index, list) => {
+const validID = (index, list) => {
     if(index > list.length) {
         messages.taskNotFound(index);
         process.exit();
     }
 };
 
-module.exports = { validpriority, validString, validInt, emptyObject, emptyContainer, validIDs};
+module.exports = { 
+    validpriority,
+    validString, 
+    validInt, 
+    emptyObject, 
+    emptyContainer, 
+    validID
+};

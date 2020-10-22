@@ -27,7 +27,7 @@ const removeItem = async (item) => {
     validator.emptyContainer(list);
 
     const itemIndex = parseInt(item[0]);
-    validator.validIDs(itemIndex, list);
+    validator.validID(itemIndex, list);
     
     storage.deleteItem(itemIndex-1);
 };
@@ -35,7 +35,7 @@ const removeItem = async (item) => {
 const markDone = async (ID) => {
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
-    validator.validIDs(ID, list);
+    validator.validID(ID, list);
     if(list[ID-1]._type === "NOTE") {
         messages.cantComplete();
         return;
@@ -47,7 +47,7 @@ const changePriority = async (item) => {
     const ID = parseInt(item[0]);
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
-    validator.validIDs(ID, list);
+    validator.validID(ID, list);
     if(list[ID-1]._type === "NOTE") {
         messages.cantComplete();
         return;
@@ -74,7 +74,7 @@ const editTask = async (item) => {
     validator.emptyContainer(list);
 
     let ID = parseInt(item[0]);
-    validator.validIDs(ID, list);
+    validator.validID(ID, list);
     let desc = item.join(' ').substring(1).trim();
     await storage.updateTask(ID-1, desc);
 };
@@ -84,7 +84,7 @@ const moveItem = async (item) => {
     validator.emptyContainer(list);
 
     let ID = parseInt(item[0]);
-    validator.validIDs(ID, list);
+    validator.validID(ID, list);
     let board = item.join(' ').substring(1).trim();
     await storage.updateTaskBoard(ID-1, board);
 };
@@ -94,7 +94,7 @@ const starItem = async (item) => {
     validator.emptyContainer(list);
 
     let ID = parseInt(item[0]);
-    validator.validIDs(ID, list);
+    validator.validID(ID, list);
     let board = item.join(' ').substring(1).trim();
     await storage.updateStarItem(ID-1, board);
 };
@@ -103,11 +103,12 @@ const copyToClipboard = async (item) => {
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
 
-    let ID = parseInt(item[0]);
-    validator.validIDs(ID, list);
-
-    const copiedItem = list[ID-1]._description;
-    clipboardy.writeSync(copiedItem);
+    const descriptions = [];
+    for(const id of item) {
+        validator.validID(id, list);
+        descriptions.push(list[id-1]._description);
+    }
+    clipboardy.writeSync(descriptions.join("\n"));
 };
 
 const unpinItem = async () => {
