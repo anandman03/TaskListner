@@ -56,7 +56,7 @@ const updateTask = async (ID, desc) => {
 const updateTaskBoard = async (ID, boardName) => {
     let list = await getTaskList();
     list[ID]._board = boardName;
-    await saveItemInFile(list, {}, ID+1, "UB");
+    await saveItemInFile(list, {}, ID+1, "U");
 };
 
 const updateStarItem = async (ID) => {
@@ -81,6 +81,9 @@ const saveItemInFile = async (task, ob, index, type) => {
         }
         if(type === "U") {
             messages.updation(index);
+        }
+        if(type === "UB") {
+            messages.listUpdation();
         }
     });
 };
