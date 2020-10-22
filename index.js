@@ -41,6 +41,9 @@ const taskListner = (flags, input) => {
     else if(flags.unpin) {
         handler.unpinItem();
     }
+    else if(flags.timeline) {
+        display.viewTimeline();
+    }
     else {
         display.displayBoards();
     }

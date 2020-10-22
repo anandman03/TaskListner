@@ -27,6 +27,29 @@ const findItem = async (item) => {
     }
 };
 
+const viewTimeline = async (item) => {
+    const list = await storage.getTaskList();
+    validator.emptyContainer(list);
+
+    const dates = new Set();
+    for(const task of list) {
+        dates.add(task._date);
+    }
+    for(const date of dates) {
+        messages.boardTitle(date);
+        for(const item of list) {
+            if(date === item._date) {
+                const task = {
+                    id: item._id,
+                    desc: item._description,
+                    days: getDate.calculateDays(item._date)
+                };
+                messages.viewTask(task, item._type);
+            }
+        }
+    }
+};
+
 const displayBoards = async () => {
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
@@ -50,7 +73,8 @@ const displayBoards = async () => {
     }
 };
 
-module.exports = { 
+module.exports = {
+    findItem,
+    viewTimeline,
     displayBoards,
-    findItem 
 };
