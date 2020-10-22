@@ -6,7 +6,6 @@ const Task = require("./schema/task");
 const Note = require("./schema/note");
 const messages = require("./messages");
 const validator = require("./validator");
-const getDate = require("./helpers/getDate");
 
 
 const createTask = async (task) => {
@@ -32,27 +31,26 @@ const removeItem = async (item) => {
     storage.deleteItem(itemIndex-1);
 };
 
-const displayBoards = async () => {
+const markDone = async (ID) => {
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
+    validator.compareLength(ID, list);
+    if(list[ID-1]._type === "NOTE") {
+        messages.cantComplete();
+        return;
+    }
+    await storage.updateCompleteStatus(ID-1);
+};
 
-    const dashBoards = new Set();
-    for(const task of list) {
-        dashBoards.add(task._board);
+const updatePriority = async (ID) => {
+    const list = await storage.getTaskList();
+    validator.emptyContainer(list);
+    validator.compareLength(ID, list);
+    if(list[ID-1]._type === "NOTE") {
+        messages.cantComplete();
+        return;
     }
-    for(const board of dashBoards) {
-        messages.boardTitle(board);
-        for(const item of list) {
-            if(board === item._board) {
-                const task = {
-                    id: item._id,
-                    desc: item._description,
-                    days: getDate.calculateDays(item._date)
-                };
-                messages.viewTask(task, item._type);
-            }
-        }
-    }
+    await storage.updateCompleteStatus(ID-1);
 };
 
 
@@ -121,4 +119,10 @@ const getPriority = async (item) => {
     return null;
 };
 
-module.exports = { createTask, createNote, displayBoards, removeItem };
+module.exports = { 
+    createTask, 
+    createNote,
+    removeItem,
+    markDone,
+    updatePriority,
+};

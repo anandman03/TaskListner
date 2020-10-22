@@ -2,7 +2,7 @@
 'use strict';
 
 const handler = require("./src/handleEvents");
-const updater = require("./src/updateEvents");
+const display = require("./src/viewBoard");
 
 const taskListner = (flags, input) => {
     if(flags.task) {
@@ -15,13 +15,13 @@ const taskListner = (flags, input) => {
         handler.removeItem(input);
     }
     else if(flags.done) {
-        updater.markDone(parseInt(input[0]));
+        handler.markDone(parseInt(input[0]));
     }
     else if(flags.priority) {
-        updater.updatePriority(parseInt(input[0]));
+        handler.updatePriority(parseInt(input[0]));
     }
     else {
-        handler.displayBoards();
+        display.displayBoards();
     }
 };
 
