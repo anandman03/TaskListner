@@ -22,6 +22,10 @@ const viewTimeline = async () => {
     let list = await storage.getTaskList();
     validator.emptyContainer(list);
 
+    let done = 0;
+    let pending = 0;
+    let notes = 0;
+
     const dates = new Set();
     for(let task of list) {
         task._date = await getDate.structureDate(task._date);
@@ -36,9 +40,22 @@ const viewTimeline = async () => {
             {
                 const task = await makeObject(item);
                 messages.viewTask(task, item._type);
+
+                if(item._type === "NOTE") {
+                    notes += 1;
+                }
+                else if(item._isComplete === true) {
+                    done += 1;
+                }
+                else {
+                    pending += 1;
+                }
             }
         }
     }
+    let percentCompletion = Math.floor(100*(done/(done + pending)));
+    messages.taskCompleteData(percentCompletion);
+    messages.overView(done, pending, notes);
 };
 
 const displayItems = async () => {
