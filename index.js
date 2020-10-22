@@ -45,7 +45,7 @@ const taskListner = (flags, input) => {
         display.viewTimeline();
     }
     else {
-        display.displayBoards();
+        display.displayItems();
     }
 };
 
