@@ -34,7 +34,11 @@ const cli = meow(help, {
         priority: {
             type: "boolean",
             alias: "p"
-        }
+        },
+        board: {
+            type: "boolean",
+            alias: "b"
+        },
     }
 });
 

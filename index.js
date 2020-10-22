@@ -20,6 +20,9 @@ const taskListner = (flags, input) => {
     else if(flags.priority) {
         handler.changePriority(input);
     }
+    else if(flags.board) {
+        handler.changeBoard(input);
+    }
     else {
         display.displayBoards();
     }

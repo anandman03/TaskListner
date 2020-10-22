@@ -37,6 +37,16 @@ const updatePriority = async (index, p) => {
     await saveItemInFile(list, {}, index+1, "U");
 };
 
+const updateBoard = async (currName, newName) => {
+    let list = await getTaskList();
+    for(const task of list) {
+        if(task._board === currName) {
+            task._board = newName;
+        }
+    }
+    await saveItemInFile(list, {}, -1, "UB");
+};
+
 const saveItemInFile = async (task, ob, index, type) => {
     fs.writeFile(pathConfig.filePath, JSON.stringify(task), err => {
         if(err) throw err;
@@ -67,6 +77,7 @@ module.exports = {
     storeItem,
     deleteItem,
     getTaskList,
+    updateBoard,
     updatePriority,
     updateCompleteStatus
 };

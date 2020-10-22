@@ -59,6 +59,15 @@ const changePriority = async (item) => {
     await storage.updatePriority(ID-1, priority);
 };
 
+const changeBoard = async (item) => {
+    const list = await storage.getTaskList();
+    validator.emptyContainer(list);
+
+    let currName = await getCurrBoardName(item);
+    let newName = await getNewBoardName(item);
+    console.log(currName + ' ' + newName);
+    await storage.updateBoard(currName, newName);
+};
 
 const structureItem = async (item, type) => {
     let newItem = new Object();
@@ -125,10 +134,31 @@ const getPriority = async (item) => {
     return str[index+2];
 };
 
+const getCurrBoardName = async (item) => {
+    const str = item.join(' ');
+    let index = str.indexOf("c:");
+    let bName = new String();
+    for(let i = index+2 ; i < str.length ; i++) {
+        if(str[i] === 'n' && str[i+1] === ':') {
+            break;
+        }
+        bName += str[i];
+    }
+    return bName.trim();
+};
+
+const getNewBoardName = async (item) => {
+    const str = item.join(' ');
+    let index = str.indexOf("n:");
+    return str.substring(index+2).trim();
+};
+
+
 module.exports = { 
     createTask, 
     createNote,
     removeItem,
     markDone,
+    changeBoard,
     changePriority,
 };
