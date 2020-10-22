@@ -9,11 +9,11 @@ const validpriority = (p) => {
 };
 
 const validString = (s) => {
-    return Number.isNaN(parseInt(s));
+    return !Number.isInteger(parseInt(s));
 };
 
 const validInt = (num) => {
-    return !Number.isNaN(parseInt(num));
+    return Number.isInteger(parseInt(num));
 };
 
 const emptyObject = (ob) => {
