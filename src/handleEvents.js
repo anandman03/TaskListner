@@ -139,6 +139,10 @@ const startTask = async (item) => {
     await storage.updateProgress(ID-1);
 };
 
+const eraseList = async () => {
+    await storage.removeAll();
+};
+
 
 const structureItem = async (item, type) => {
     let newItem = new Object();
@@ -233,6 +237,7 @@ module.exports = {
     moveItem,
     markDone,
     editTask,
+    eraseList,
     startTask,
     unpinItem,
     changeBoard,

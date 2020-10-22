@@ -75,6 +75,10 @@ const updateProgress = async (ID) => {
     await saveItemInFile(list, {}, ID+1, "U");
 };
 
+const removeAll = async() => {
+    await saveItemInFile([], {}, -1, "UB");
+};
+
 
 const saveItemInFile = async (task, ob, index, type) => {
     fs.writeFile(pathConfig.filePath, JSON.stringify(task), err => {
@@ -105,7 +109,8 @@ const FileExist = () => {
      return fs.existsSync(pathConfig.filePath);
 };
 
-module.exports = { 
+module.exports = {
+    removeAll, 
     storeItem,
     deleteItem,
     getTaskList,

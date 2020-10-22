@@ -71,6 +71,9 @@ const cli = meow(help, {
             type: "boolean",
             alias: "y"
         },
+        erase: {
+            type: "boolean"
+        }
     }
 });
 
