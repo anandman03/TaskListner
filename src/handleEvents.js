@@ -118,7 +118,7 @@ const unpinItem = async () => {
     const modifiedList = [];
     let idCounter = 1;
     for(const item of list) {
-        if(item._isComplete === false) {
+        if(item._isComplete === false || item._type === "NOTE") {
             item._id = idCounter;
             idCounter += 1;
             modifiedList.push(item);
