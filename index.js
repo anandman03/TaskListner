@@ -32,6 +32,9 @@ const taskListner = (flags, input) => {
     else if(flags.find) {
         display.findItem(input);
     }
+    else if(flags.star) {
+        handler.starItem(input);
+    }
     else {
         display.displayBoards();
     }

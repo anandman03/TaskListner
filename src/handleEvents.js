@@ -88,6 +88,16 @@ const moveItem = async (item) => {
     await storage.updateTaskBoard(ID-1, board);
 };
 
+const starItem = async (item) => {
+    const list = await storage.getTaskList();
+    validator.emptyContainer(list);
+
+    let ID = parseInt(item[0]);
+    validator.compareLength(ID, list);
+    let board = item.join(' ').substring(1).trim();
+    await storage.updateStarItem(ID-1, board);
+};
+
 
 const structureItem = async (item, type) => {
     let newItem = new Object();
@@ -178,6 +188,7 @@ module.exports = {
     createTask, 
     createNote,
     removeItem,
+    starItem,
     moveItem,
     markDone,
     editTask,
