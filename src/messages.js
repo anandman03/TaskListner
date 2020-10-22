@@ -47,7 +47,15 @@ const updation = (ID) => {
     });
 };
 
-const invalid = (ID) => {
+const listUpdation = () => {
+    signale.debug({
+        prefix: '\n', 
+        message: chalk.whiteBright(`TaskList Updated`), 
+        suffix: '\n'
+    });
+};
+
+const invalid = () => {
     signale.error({
         prefix: '\n', 
         message: chalk.redBright('Invalid Input'), 
@@ -144,5 +152,6 @@ module.exports = {
     taskEmpty,
     boardTitle,
     taskNotFound,
+    listUpdation,
     taskCompleteData
 };
