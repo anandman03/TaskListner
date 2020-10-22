@@ -37,7 +37,7 @@ const markDone = async (ID) => {
     validator.emptyContainer(list);
     validator.validID(ID, list);
     if(list[ID-1]._type === "NOTE") {
-        messages.cantComplete();
+        messages.taskNotFound();
         return;
     }
     await storage.updateCompleteStatus(ID-1);

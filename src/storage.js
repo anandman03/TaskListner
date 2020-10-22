@@ -74,13 +74,13 @@ const saveItemInFile = async (task, ob, index, type) => {
     fs.writeFile(pathConfig.filePath, JSON.stringify(task), err => {
         if(err) throw err;
         if(type === "C") {
-            messages.success(ob._type);
+            messages.creation(ob);
         }
         if(type === "D") {
             messages.deletion(index);
         }
         if(type === "U") {
-            messages.update(index);
+            messages.updation(index);
         }
     });
 };

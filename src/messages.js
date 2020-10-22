@@ -19,21 +19,56 @@ signale.config({
     displayLabel: false,
 });
 
-const success = (type) => signale.debug(chalk.white.bold(`added ${String(type).toLocaleLowerCase()} successfully.`));
+const creation = (task) => {
+    signale.debug({
+        prefix: '\n', 
+        message: chalk.whiteBright(`Created ${String(task._type).toLocaleLowerCase()}: ${task._id}`), 
+        suffix: '\n'
+    });
+};
 
-const deletion = (index) => signale.debug(chalk.white.bold(`removed ${index} successfully.`));
+const deletion = (ID) => {
+    signale.debug({
+        prefix: '\n', 
+        message: chalk.whiteBright(`Removed item: ${ID}`), 
+        suffix: '\n'
+    });
+};
 
-const update = (index) => signale.debug(chalk.white.bold(`update ${index} successfully.`));
+const updation = (ID) => {
+    signale.debug({
+        prefix: '\n', 
+        message: chalk.whiteBright(`Updated item: ${ID}`), 
+        suffix: '\n'
+    });
+};
 
-const invalid = () => signale.error(chalk.red.bold('Invalid Input'));
+const invalid = (ID) => {
+    signale.error({
+        prefix: '\n', 
+        message: chalk.redBright('Invalid Input'), 
+        suffix: '\n'
+    });
+};
 
-const boardTitle = (name) => console.log(boxen(chalk.rgb(255,0,255)(`${name}`), boxOptions));
+const boardTitle = (name) => {
+    console.log('\n');
+    console.log(boxen(chalk.rgb(255,0,255)(`${name}`), boxOptions));
+};
 
-const taskEmpty = () => signale.error("You have No Task");
+//
+const taskEmpty = () => {
+    signale.error("You have No Task");
+};
+//
 
-const taskNotFound = (index) => signale.error(`Task with ID: ${index} not found`);
-
-const cantComplete = () => signale.error(`Task with ID: ${index} not found`);
+const taskNotFound = (ID) => {
+    signale.error({
+        prefix: '\n', 
+        message: chalk.whiteBright(`Unable to find item with id: ${ID}`), 
+        suffix: '\n'
+    });
+};
 
 const viewTask = (item, type) =>  {
     if(type === "NOTE") {
@@ -48,4 +83,4 @@ const viewTask = (item, type) =>  {
     }
 };
 
-module.exports = { success, deletion, invalid, boardTitle, viewTask, taskEmpty, taskNotFound, cantComplete, update };
+module.exports = { creation, deletion, invalid, boardTitle, viewTask, taskEmpty, taskNotFound, cantComplete, updation };
