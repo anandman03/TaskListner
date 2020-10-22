@@ -96,14 +96,14 @@ const viewTask = (item, type) =>  {
         signale.note({
             prefix: chalk.gray(`${item.id}.`), 
             message: chalk.gray(`${item.desc}`), 
-            suffix: chalk.gray(`(${item.days}d)`)
+            suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
         });
     }
     else if(type === "TASK") {
         signale.success({
             prefix: chalk.gray(`${item.id}.`), 
             message: chalk.gray(`${item.desc}`), 
-            suffix: chalk.gray(`(${item.days}d)`)
+            suffix: chalk.gray(`(${item.days}d)`) + ((item.star === true) ? '⭐' : ''),
         });
     }
 };

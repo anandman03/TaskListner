@@ -152,7 +152,8 @@ const makeObject = async (item) => {
     const task = {
         id: item._id,
         desc: item._description,
-        days: getDate.calculateDays(item._date)
+        days: getDate.calculateDays(item._date),
+        star: Boolean(item._isStarred),
     };
     return task;
 };
