@@ -6,6 +6,27 @@ const messages = require("./messages");
 const validator = require("./validator");
 const getDate = require("./helpers/getDate");
 
+
+const findItem = async (item) => {
+    const value = item.join(' ').trim();
+    const list = await storage.getTaskList();
+
+    if(validator.validInt(value)) {
+        for(const task of list) {
+            if(value == task._id) {
+                console.log(task);
+            }
+        }
+    }
+    else {
+        for(const task of list) {
+            if(value == task._board) {
+                console.log(task);
+            }
+        }
+    }
+};
+
 const displayBoards = async () => {
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
@@ -29,4 +50,7 @@ const displayBoards = async () => {
     }
 };
 
-module.exports = { displayBoards };
+module.exports = { 
+    displayBoards,
+    findItem 
+};
