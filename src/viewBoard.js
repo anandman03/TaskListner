@@ -45,6 +45,10 @@ const displayItems = async () => {
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
 
+    let done = 0;
+    let pending = 0;
+    let notes = 0;
+
     const dashBoards = new Set();
     for(const task of list) {
         dashBoards.add(task._board);
@@ -58,9 +62,21 @@ const displayItems = async () => {
             {
                 const task = await makeObject(item);
                 messages.viewTask(task, item._type);
+
+                if(item._type === "NOTE") {
+                    notes += 1;
+                }
+                else if(item._isComplete === true) {
+                    done += 1;
+                }
+                else {
+                    pending += 1;
+                }
             }
         }
     }
+    let percentCompletion = Math.floor(100*(done/(done + pending)));
+    messages.taskCompleteData(percentCompletion);
 };
 
 const makeObject = async (item) => {

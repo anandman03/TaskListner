@@ -70,6 +70,13 @@ const taskNotFound = (ID) => {
     });
 };
 
+const taskCompleteData = (percent) => {
+    signale.fav({
+        prefix: '\n', 
+        message: chalk.gray(`${percent}% of the tasks complete.`)
+    });
+};
+
 const viewTask = (item, type) =>  {
     if(type === "NOTE") {
         signale.note(chalk.yellowBright(`${item.id}. ${item.desc} (${item.days}d)`));
@@ -83,4 +90,14 @@ const viewTask = (item, type) =>  {
     }
 };
 
-module.exports = { creation, deletion, invalid, boardTitle, viewTask, taskEmpty, taskNotFound, updation };
+module.exports = {
+    creation,
+    deletion,
+    invalid,
+    boardTitle,
+    viewTask,
+    taskEmpty,
+    taskNotFound,
+    updation,
+    taskCompleteData
+};
