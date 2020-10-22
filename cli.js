@@ -64,7 +64,8 @@ const cli = meow(help, {
             alias: "u"
         },
         timeline: {
-            type: "boolean"
+            type: "boolean",
+            alias: "i"
         },
     }
 });
