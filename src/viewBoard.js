@@ -283,7 +283,7 @@ const viewBoard = async (value) => {
         }
     }
     if(found === false) {
-        messages.boardNotFOund();
+        messages.boardNotFound();
         process.exit();
     }
 
