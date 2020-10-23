@@ -100,6 +100,14 @@ const taskNotFound = (ID) => {
     });
 };
 
+const notFound = () => {
+    signale.debug({
+        prefix: '\n', 
+        message: chalk.whiteBright(`No task found.`), 
+        suffix: '\n'
+    });
+};
+
 const taskCompleteData = (percent) => {
     signale.fav({
         prefix: '\n', 
@@ -181,6 +189,7 @@ module.exports = {
     viewTask,
     updation,
     overView,
+    notFound,
     taskEmpty,
     boardTitle,
     multiFlags,

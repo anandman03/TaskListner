@@ -161,12 +161,16 @@ const doneTask = async () => {
             notes += 1;
         }
     }
+    if(done === 0) {
+        messages.notFound();
+    }
     calculate();
 };
 
 const pendingTask = async () => {
     const list = await storage.getTaskList();
     initialise();
+    messages.newLine();
 
     for(const item of list) {
         if(item._isComplete !== true) {
@@ -183,6 +187,9 @@ const pendingTask = async () => {
         if(item._type === "NOTE") {
             notes += 1;
         }
+    }
+    if(pending === 0) {
+        messages.notFound();
     }
     calculate();
 };
@@ -207,6 +214,9 @@ const inProgressTask = async () => {
             notes += 1;
         }
     }
+    if(inProcess === 0) {
+        messages.notFound();
+    }
     calculate();
 };
 
@@ -229,6 +239,9 @@ const getNotes = async () => {
             messages.viewTask(task, item._type);
             notes += 1;
         }
+    }
+    if(notes === 0) {
+        messages.notFound();
     }
     calculate();
 };
