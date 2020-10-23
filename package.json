@@ -2,6 +2,7 @@
   "name": "tasklistner",
   "version": "1.0.0",
   "description": "A Tasks, boards & notes for the command-line habitat",
+  "repository": "anandman03/TaskListner",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,12 +13,24 @@
   "bin": {
     "tl": "cli.js"
   },
+  "keywords": [
+    "task",
+    "board",
+    "note",
+    "todo",
+    "notebook",
+    "command",
+    "line",
+    "console",
+    "cli",
+    "app"
+  ],
   "files": [
     "src",
     "cli.js",
     "index.js"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "boxen": "^4.2.0",
     "chalk": "^4.1.0",
