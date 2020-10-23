@@ -45,7 +45,22 @@ const viewTimeline = async () => {
         task._date = await getDate.structureDate(task._date);
         dates.add(task._date);
     }
-    for(let date of dates) 
+    let uniqueDates = [];
+    for(const date of dates) {
+        uniqueDates.push(date);
+    }
+    uniqueDates.sort((d1, d2) => {
+        let m1 = getDate.monthValue(d1.substring(4, 7));
+        let m2 = getDate.monthValue(d2.substring(4, 7));
+        if(parseInt(m1) == parseInt(m2)) {
+            let day1 = Number(d1.substring(8, 10));
+            let day2 = Number(d2.substring(8, 10));
+            return day1 - day2;
+        }
+        return m1 - m2;
+    });
+
+    for(let date of uniqueDates)
     {
         messages.boardTitle(date);
         for(const item of list)
