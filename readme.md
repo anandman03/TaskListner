@@ -47,6 +47,7 @@ $ tl --help
       --board     -b     Change board name
       --edit,     -e     Edit item description
       --move,     -m     Move item between boards
+      --find,     -f     Find item/boards
       --star,     -s     Star/unstar item
       --copy,     -c     Copy item description to clipboard
       --unpin,    -u     Remove all completed tasks
@@ -67,6 +68,7 @@ $ tl --help
       $ tl --board c:project n:coding
       $ tl --edit 2 Some new task description
       $ tl --move 1 b:college
+      $ tl --find college
       $ tl --star 3
       $ tl --copy 1 2 3
       $ tl --unpin
