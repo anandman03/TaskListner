@@ -5,7 +5,10 @@ const handler = require("./src/handleEvents");
 const display = require("./src/viewBoard");
 
 const taskListner = (flags, input) => {
-    if(flags.task) {
+    if(checkMultipleFlags(flags)) {
+        handler.multipleFlags();
+    }
+    else if(flags.task) {
         handler.createTask(input);
     }
     else if(flags.note) {
@@ -56,6 +59,16 @@ const taskListner = (flags, input) => {
     else {
         display.displayItems();
     }
+};
+
+const checkMultipleFlags = (flags) => {
+    let counter = 0;
+    for(const flag in flags) {
+        if(flags[flag] == true) {
+            counter += 1;
+        }
+    }
+    return Boolean(counter > 1);
 };
 
 module.exports = taskListner;

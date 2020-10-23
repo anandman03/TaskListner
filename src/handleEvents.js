@@ -228,6 +228,10 @@ const getNewBoardName = async (item) => {
     return str.substring(index+2).trim();
 };
 
+const multipleFlags = async () => {
+    await messages.multiFlags();
+};
+
 
 module.exports = { 
     createTask, 
@@ -241,6 +245,7 @@ module.exports = {
     startTask,
     unpinItem,
     changeBoard,
+    multipleFlags,
     changePriority,
     copyToClipboard,
 };

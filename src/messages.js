@@ -91,6 +91,14 @@ const taskCompleteData = (percent) => {
     });
 };
 
+const multiFlags = () => {
+    signale.error({
+        prefix: '\n', 
+        message: chalk.whiteBright(`Concurrent operation not allowed.`), 
+        suffix: '\n'
+    });
+};
+
 const overView = (done, pending, inProcess, notes) => {
     const Done = chalk.green(`${done}`);
     const Pending = chalk.magenta(`${pending}`);
@@ -159,6 +167,7 @@ module.exports = {
     overView,
     taskEmpty,
     boardTitle,
+    multiFlags,
     taskNotFound,
     listUpdation,
     taskCompleteData
