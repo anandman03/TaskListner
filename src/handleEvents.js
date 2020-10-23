@@ -26,15 +26,17 @@ const removeItem = async (item) => {
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
 
+    await validator.validInt(item[0]);
     const itemIndex = parseInt(item[0]);
     validator.validID(itemIndex, list);
     
-    storage.deleteItem(itemIndex-1);
+    await storage.deleteItem(itemIndex-1);
 };
 
 const markDone = async (ID) => {
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
+    validator.validInt(ID);
     validator.validID(ID, list);
     if(list[ID-1]._type === "NOTE") {
         messages.taskNotFound(ID);
@@ -47,9 +49,10 @@ const changePriority = async (item) => {
     const ID = parseInt(item[0]);
     const list = await storage.getTaskList();
     validator.emptyContainer(list);
+    validator.validInt(item[0]);
     validator.validID(ID, list);
     if(list[ID-1]._type === "NOTE") {
-        messages.cantComplete();
+        messages.taskNotFound(ID);
         return;
     }
     const priority = await getPriority(item);
@@ -57,6 +60,7 @@ const changePriority = async (item) => {
         messages.invalid();
         process.exit();
     }
+    validator.validInt(priority);
     await storage.updatePriority(ID-1, priority);
 };
 
@@ -74,6 +78,7 @@ const editTask = async (item) => {
     validator.emptyContainer(list);
 
     let ID = parseInt(item[0]);
+    validator.validInt(item[0]);
     validator.validID(ID, list);
     let desc = item.join(' ').substring(1).trim();
     await storage.updateTask(ID-1, desc);
@@ -84,6 +89,7 @@ const moveItem = async (item) => {
     validator.emptyContainer(list);
 
     let ID = parseInt(item[0]);
+    validator.validInt(item[0]);
     validator.validID(ID, list);
     let board = item.join(' ').substring(1).trim();
     await storage.updateTaskBoard(ID-1, board);
@@ -94,6 +100,7 @@ const starItem = async (item) => {
     validator.emptyContainer(list);
 
     let ID = parseInt(item[0]);
+    validator.validInt(item[0]);
     validator.validID(ID, list);
     let board = item.join(' ').substring(1).trim();
     await storage.updateStarItem(ID-1, board);
@@ -106,6 +113,7 @@ const copyToClipboard = async (item) => {
     const descriptions = [];
     for(const id of item) {
         validator.validID(id, list);
+        validator.validInt(id);
         descriptions.push(list[id-1]._description);
     }
     clipboardy.writeSync(descriptions.join("\n"));
@@ -135,6 +143,7 @@ const startTask = async (item) => {
     validator.emptyContainer(list);
 
     const ID = parseInt(item[0]);
+    validator.validInt(item[0]);
     validator.validID(ID, list);
     await storage.updateProgress(ID-1);
 };

@@ -12,8 +12,11 @@ const validString = (s) => {
     return !Number.isInteger(parseInt(s));
 };
 
-const validInt = (num) => {
-    return Number.isInteger(parseInt(num));
+const validInt = async (num) => {
+    if(!Number.isInteger(parseInt(num))) {
+        messages.invalid();
+        process.exit();
+    }
 };
 
 const emptyObject = (ob) => {
