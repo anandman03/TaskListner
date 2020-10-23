@@ -139,9 +139,9 @@ $ tl -d 1
 
 To set a priority level for a task while initializing it, include id and the `p:x` syntax in the task's description, where x can be an integer of value `1`, `2` or `3`. Note that all tasks by default are created with a normal priority - `3`.
 
-- `1` - Normal priority
+- `3` - Normal priority
 - `2` - Medium priority
-- `3` - High priority
+- `1` - High priority
 
 ```
 $ tl -p 1 p:3
