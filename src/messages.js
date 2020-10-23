@@ -71,6 +71,14 @@ const notesUpdation = () => {
     });
 };
 
+const copiedItem = () => {
+    signale.debug({
+        prefix: '\n', 
+        message: chalk.whiteBright(`Item copied`), 
+        suffix: '\n'
+    });
+};
+
 const boardTitle = (name) => {
     console.log('\n');
     console.log(boxen(chalk.rgb(255,0,255)(`${name}`), boxOptions));
@@ -176,6 +184,7 @@ module.exports = {
     taskEmpty,
     boardTitle,
     multiFlags,
+    copiedItem,
     taskNotFound,
     listUpdation,
     notesUpdation,

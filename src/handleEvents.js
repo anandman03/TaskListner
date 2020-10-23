@@ -117,6 +117,7 @@ const copyToClipboard = async (item) => {
         descriptions.push(list[id-1]._description);
     }
     clipboardy.writeSync(descriptions.join("\n"));
+    messages.copiedItem();
 };
 
 const unpinItem = async () => {
