@@ -100,6 +100,14 @@ const taskNotFound = (ID) => {
     });
 };
 
+const boardNotFOund = (ID) => {
+    signale.error({
+        prefix: '\n', 
+        message: chalk.whiteBright(`Unable to find board`), 
+        suffix: '\n'
+    });
+};
+
 const notFound = () => {
     signale.debug({
         prefix: '\n', 
@@ -197,5 +205,6 @@ module.exports = {
     taskNotFound,
     listUpdation,
     notesUpdation,
+    boardNotFOund,
     taskCompleteData
 };

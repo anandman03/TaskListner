@@ -25,9 +25,7 @@ const calculate = () => {
 
 const findItem = async (item) => {
     const value = item.join(' ').trim();
-
-    messages.newLine();
-    if(validator.validInt(value)) {
+    if(Number.isInteger(parseInt(value))) {
         await viewTask(Number(value));
     }
     else {
@@ -250,6 +248,9 @@ const viewTask = async (value) => {
     const list = await storage.getTaskList();
     initialise();
 
+    validator.validID(value, list);
+    messages.newLine();
+
     for(const item of list) {
         if(value == item._id) {
             const task = await makeObject(item);
@@ -274,6 +275,17 @@ const viewTask = async (value) => {
 const viewBoard = async (value) => {
     const list = await storage.getTaskList();
     initialise();
+
+    let found = false;
+    for(const item of list) {
+        if(item._board == value) {
+            found = true;
+        }
+    }
+    if(found === false) {
+        messages.boardNotFOund();
+        process.exit();
+    }
 
     messages.boardTitle(value);
     for(const item of list) {
