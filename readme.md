@@ -240,6 +240,7 @@ $ tl --erase
 - [clipboardy](https://www.npmjs.com/package/clipboardy) - Access the system clipboard (copy/paste)
 - [boxen](https://www.npmjs.com/package/boxen) - Create boxes in the terminal
 - [meow](https://www.npmjs.com/package/meow) - CLI app helper
+- [carbon](https://carbon.now.sh/) - Create and share beautiful images of your source code.
 
 
 ## Creator
