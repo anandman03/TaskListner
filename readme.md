@@ -248,3 +248,7 @@ $ tl --erase
 ## Creator
 
 - Mansimar Anand [(@anandman03)](https://github.com/anandman03)
+
+## License
+
+[MIT](LICENSE)
