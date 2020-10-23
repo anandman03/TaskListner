@@ -69,6 +69,16 @@ const changeBoard = async (item) => {
     validator.emptyContainer(list);
 
     let currName = await getCurrBoardName(item);
+    let found = false;
+    for(const item of list) {
+        if(item._board == currName) {
+            found = true;
+        }
+    }
+    if(found === false) {
+        messages.boardNotFound();
+        process.exit();
+    }
     let newName = await getNewBoardName(item);
     await storage.updateBoard(currName, newName);
 };
