@@ -2,7 +2,10 @@
   "name": "tasklistner",
   "version": "1.0.0",
   "description": "A Tasks, boards & notes for the command-line habitat",
-  "repository": "anandman03/TaskListner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anandman03/TaskListner.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
