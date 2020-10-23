@@ -63,6 +63,14 @@ const invalid = () => {
     });
 };
 
+const notesUpdation = () => {
+    signale.error({
+        prefix: '\n', 
+        message: chalk.redBright('Cannot update notes.'), 
+        suffix: '\n'
+    });
+};
+
 const boardTitle = (name) => {
     console.log('\n');
     console.log(boxen(chalk.rgb(255,0,255)(`${name}`), boxOptions));
@@ -170,5 +178,6 @@ module.exports = {
     multiFlags,
     taskNotFound,
     listUpdation,
+    notesUpdation,
     taskCompleteData
 };

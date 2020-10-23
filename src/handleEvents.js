@@ -52,7 +52,7 @@ const changePriority = async (item) => {
     validator.validInt(item[0]);
     validator.validID(ID, list);
     if(list[ID-1]._type === "NOTE") {
-        messages.taskNotFound(ID);
+        messages.notesUpdation();
         return;
     }
     const priority = await getPriority(item);
