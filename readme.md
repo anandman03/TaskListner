@@ -105,8 +105,8 @@ The following is a minor walkthrough containing a set of examples on how to use 
 To create a new task use the `--task`/`-t` option with your task's description following right after. There are two optional arguements `b:<board-name>` and `p:<priority>`. By default board name is `Default` and priority is 3.
 
 ```
-$ tl -t Improve documentation
-$ tl -t Improve documentation b:coding p:2
+$ listen -t Improve documentation
+$ listen -t Improve documentation b:coding p:2
 
 ```
 
@@ -115,8 +115,8 @@ $ tl -t Improve documentation b:coding p:2
 To create a new note use the `--note`/`-n` option with your note's body following right after. There are two optional arguements `b:<board-name>` and `p:<priority>`. By default board name is `Default` and priority is 3.
 
 ```
-$ tl -n Mergesort worse-case O(nlogn)
-$ tl -n Mergesort worse-case O(nlogn) b:college p:2
+$ listen -n Mergesort worse-case O(nlogn)
+$ listen -n Mergesort worse-case O(nlogn) b:college p:2
 ```
 
 ### Remove Item
@@ -124,7 +124,7 @@ $ tl -n Mergesort worse-case O(nlogn) b:college p:2
 To delete an item, use the `--remove`/`-r` options followed by the id of the target items. Duplicate ids are automatically filtered out.
 
 ```
-$ tl -r 2
+$ listen -r 2
 ```
 
 ### Done Task
@@ -132,7 +132,7 @@ $ tl -r 2
 To mark a task as complete/incomplete, use the `--done`/`-d` option followed by the id of the target task. Note that the option will update to its opposite the `complete` status of the given tasks, thus checking a complete task will render it as pending and a pending task as complete. Duplicate ids are automatically filtered out.
 
 ```
-$ tl -d 1
+$ listen -d 1
 ```
 
 ### Set Priority
@@ -144,7 +144,7 @@ To set a priority level for a task while initializing it, include id and the `p:
 - `1` - High priority
 
 ```
-$ tl -p 1 p:3
+$ listen -p 1 p:3
 ```
 
 ### Change Boards
@@ -152,7 +152,7 @@ $ tl -p 1 p:3
 To change the name of the board, use the `--board/-b` option follwed by `c:x`, where x is the board name to be changed and then `n:y`, where y is the new name of the board.
 
 ```
-$ tl -b c:coding n:college
+$ listen -b c:coding n:college
 ```
 
 ### Edit Item
@@ -160,7 +160,7 @@ $ tl -b c:coding n:college
 To change the description of an item, use the `--edit/-e` option follwed by the id of the target task and new description to be assigned.
 
 ```
-$ tl -e 2 New task description
+$ listen -e 2 New task description
 ```
 
 ### Move Item
@@ -168,7 +168,7 @@ $ tl -e 2 New task description
 To move an item to another boards, use the `--move`/`-m` option, followed by the target item id, prefixed by the `b:` symbol, and the name of the destination board. The default board `Default` can be accessed through the `default` keyword.
 
 ```
-$ tl -m 1 myboard reviews
+$ listen -m 1 myboard reviews
 ```
 
 ### Star Item
@@ -176,7 +176,7 @@ $ tl -m 1 myboard reviews
 To mark an item as favorite, use the `--star`/`-s` option followed by the id of the target item. The functionality of this option is the same as the one of the above described `--done` option.
 
 ```
-$ tl -s 1
+$ listen -s 1
 ```
 
 ### Copy Item Description
@@ -184,7 +184,7 @@ $ tl -s 1
 To copy to your system's clipboard the description of one or more items, use the `--copy`/`-y` option followed by the ids of the target items. Note that the option will also include the newline character as a separator to each pair of adjacent copied descriptions, thus resulting in a clear and readable stack of sentences on paste.
 
 ```
-$ tl -c 1 2 3
+$ listen -c 1 2 3
 ```
 
 ### Delete Marked Done Tasks
@@ -192,7 +192,7 @@ $ tl -c 1 2 3
 To delete/clear all complete tasks at once across all boards, use the `--unpin`/`-u` option.
 
 ```
-$ tl --unpin
+$ listen --unpin
 ```
 
 ### Display Timeline
@@ -200,7 +200,7 @@ $ tl --unpin
 In order to display all items in a timeline view, based on their creation date, the `--timeline` option can be used.
 
 ```
-$ tl --timeline
+$ listen --timeline
 ```
 
 ### Begin Task
@@ -208,7 +208,7 @@ $ tl --timeline
 To mark a task as started/paused, use the `--begin`/`-b` option followed by the id of the target task. The functionality of this option is the same as the one of the above described `--check` option.
 
 ```
-$ tl -b 2
+$ listen -b 2
 ```
 
 ### List Items
@@ -216,7 +216,7 @@ $ tl -b 2
 To list a group of items where each item complies with a specific set of attributes, use the `--list`/`-l` option followed by the desired attributes. Board names along with item traits can be considered valid listing attributes. For example to list all pending tasks, the following could be used. The available attributes are `pending/in-process/done/notes`.
 
 ```
-$ tl -l pending
+$ listen -l pending
 ```
 
 ### Find Items
@@ -224,7 +224,7 @@ $ tl -l pending
 To find for task/board, use the `--find`/`-f` option, followed by id of the task or name of the board.
 
 ```
-$ tl -l coding
+$ listen -l coding
 ```
 
 ### Erase Items
@@ -232,7 +232,7 @@ $ tl -l coding
 To remove all the elements and boards use `--erase`.
 
 ```
-$ tl --erase
+$ listen --erase
 ```
 
 ## Related
