@@ -14,9 +14,6 @@
     "name": "Mansimar Anand",
     "email": "anandmansimar@gmail.com"
   },
-  "bin": {
-    "tl": "cli.js"
-  },
   "keywords": [
     "task",
     "board",
