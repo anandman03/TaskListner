@@ -1,7 +1,7 @@
 {
   "name": "tasklistner",
   "version": "1.0.2",
-  "main": "tl",
+  "main": "tl.js",
   "description": "A Tasks, boards & notes for the command-line habitat",
   "repository": {
     "type": "git",
