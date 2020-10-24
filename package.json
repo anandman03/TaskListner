@@ -1,6 +1,6 @@
 {
   "name": "tasklistner",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "tl",
   "description": "A Tasks, boards & notes for the command-line habitat",
   "repository": {
