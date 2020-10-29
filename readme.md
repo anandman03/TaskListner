@@ -12,7 +12,7 @@
 
 ## Description
 
-By utilizing a simple and minimal usage syntax, that requires a flat learning curve, tasklistner enables you to effectively manage your tasks and notes across multiple boards from within your terminal. All data are written atomically to the storage in order to prevent corruptions, and are never shared with anyone or anything.
+By utilizing a simple and minimal usage syntax, that requires a flat learning curve, tasklistner enables you to effectively manage your tasks and notes across multiple boards from within your terminal. All data are written atomically to the storage in order to prevent corruptions, and are never shared with anyone or anything. The maintained repository can be found here : [Task-Organizer](https://github.com/anandman03/Task-Organizer)
 
 ## Highlights
 
